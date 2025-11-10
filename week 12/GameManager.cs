@@ -10,6 +10,7 @@ public class GameManager : MonoBehaviour
     public GameObject playerPrefab;
     public GameObject enemyOnePrefab;
     public GameObject cloudPrefab;
+    public GameObject coinPrefab;
 
     public TextMeshProUGUI livesText;
     public TextMeshProUGUI scoreText;
@@ -17,17 +18,15 @@ public class GameManager : MonoBehaviour
     public float horizontalScreenSize;
     public float verticalScreenSize;
 
-    public int score;
-
     // Start is called before the first frame update
     void Start()
     {
         horizontalScreenSize = 10f;
         verticalScreenSize = 6.5f;
-        score = 0;
         Instantiate(playerPrefab, transform.position, Quaternion.identity);
         CreateSky();
         InvokeRepeating("CreateEnemy", 1, 3);
+        InvokeRepeating("CreateCoin", 1, Random.Range(3,10));
     }
 
     // Update is called once per frame
@@ -49,9 +48,13 @@ public class GameManager : MonoBehaviour
         }
         
     }
-    public void AddScore(int earnedScore)
+
+    void CreateCoin()
     {
-        score = score + earnedScore;
+        Instantiate(coinPrefab, new Vector3(Random.Range(-horizontalScreenSize, horizontalScreenSize), Random.Range(-verticalScreenSize, verticalScreenSize), 0), Quaternion.identity);
+    }
+    public void AddScore(int score)
+    {
         scoreText.text = "Score: " + score;
     }
 
