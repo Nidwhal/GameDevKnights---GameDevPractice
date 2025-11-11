@@ -49,9 +49,8 @@ public class PlayerController : MonoBehaviour
     }
 
     public void GainScore(int earnedScore)
-    {
-        score = score + earnedScore;
-        gameManager.AddScore(score);
+    { 
+        gameManager.AddScore(earnedScore);
     }
 
     void Shooting()

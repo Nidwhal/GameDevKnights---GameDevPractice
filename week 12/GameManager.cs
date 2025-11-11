@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using System.Runtime.CompilerServices;
 
 public class GameManager : MonoBehaviour
 {
@@ -17,6 +18,7 @@ public class GameManager : MonoBehaviour
 
     public float horizontalScreenSize;
     public float verticalScreenSize;
+    private int currentScore;
 
     // Start is called before the first frame update
     void Start()
@@ -55,7 +57,8 @@ public class GameManager : MonoBehaviour
     }
     public void AddScore(int score)
     {
-        scoreText.text = "Score: " + score;
+        currentScore = currentScore + score;
+        scoreText.text = "Score: " + currentScore;
     }
 
     public void ChangeLivesText (int currentLives)
