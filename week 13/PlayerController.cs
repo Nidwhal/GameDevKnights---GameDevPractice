@@ -76,6 +76,16 @@ public class PlayerController : MonoBehaviour
         gameManager.PlaySound(2);
     }
 
+    IEnumerator ShieldPowerDown()
+    {
+        yield return new WaitForSeconds(3f);
+        Shielding = false;
+        shieldPrefab.SetActive(false);
+        gameManager.ManagePowerupText(0);
+        gameManager.PlaySound(2);
+
+    }
+
     private void OnTriggerEnter2D(Collider2D whatDidIHit)
     {
         if(whatDidIHit.tag == "Powerup")
@@ -103,9 +113,14 @@ public class PlayerController : MonoBehaviour
                     gameManager.ManagePowerupText(3);
                     break;
                 case 4:
-                    Shielding = true; //Picked up shield
-                    shieldPrefab.SetActive(true);
-                    gameManager.ManagePowerupText(4);
+                    if (Shielding){}
+                    else
+                    {
+                        Shielding = true; //Picked up shield
+                        StartCoroutine(ShieldPowerDown());
+                        shieldPrefab.SetActive(true);
+                        gameManager.ManagePowerupText(4);
+                    }
                     break;
             }
         }
